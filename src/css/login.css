@@ -1,0 +1,14 @@
+.login{
+	text-align: center;
+	margin-top: 50px; 
+}
+.image{
+    width: 30%;
+    height: 30%;
+}
+
+.MuiButton-containedSecondary.login-button{
+	margin-top: 30px;
+	width: 100%;
+	color: white;
+}
