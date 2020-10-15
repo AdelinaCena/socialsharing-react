@@ -7,6 +7,7 @@ import RootReducer from './store/reducers/RootReducer';
 import thunk from 'redux-thunk';
 
 const store = createStore(RootReducer, applyMiddleware(thunk));
+
 ReactDOM.render(
     <Provider store={store}>
       <App />
