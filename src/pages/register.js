@@ -4,6 +4,7 @@ import Grid from '@material-ui/core/Grid';
 import AppIcon from '../images/icon.png';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
+import { Link } from 'react-router-dom';
 
 import { signUp } from '../store/actions/AuthAction';
 // redux
@@ -40,6 +41,7 @@ class register extends Component {
 	}
 
 	render() {
+		const {authResponse} = this.props;
 		return(
 			<Grid container className="styles.form">
 			    <Grid item sm={4} xs={12}>
@@ -81,6 +83,10 @@ class register extends Component {
 				            >
 				              Register
 				            </Button>
+				             <br />
+				            <small>
+				              dont have an account ? sign up <Link to="/login">here</Link>
+				            </small>
 					    </form>
 				    </div>
 				</Grid>

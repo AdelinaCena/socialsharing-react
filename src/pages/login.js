@@ -4,7 +4,10 @@ import Grid from '@material-ui/core/Grid';
 import AppIcon from '../images/icon.png';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
-
+import { Link } from 'react-router-dom';
+import { loginUser } from '../store/actions/AuthAction';
+// redux
+import { connect } from 'react-redux'
 // css
 import '../css/login.css';
 
@@ -13,9 +16,31 @@ const styles = (theme) => ({
 });
 
 class login extends Component {
+	constructor(props)
+	{
+		super(props);
+        this.state = {
+        	email:"",
+        	password:""
+        }
+	}
+
+	handleSubmit = (e) =>{
+		e.preventDefault();
+		console.log(this.state);
+		this.props.loginUser(this.state, this.props.history);
+	}
+
+	handleChange = (e) => {
+		e.preventDefault();
+		this.setState({
+			[e.target.name] :e.target.value
+		});
+	}
+
 	render() {
 		return(
-			<Grid container spacing={16} className="styles.form">
+			<Grid container className="styles.form">
 			    <Grid item sm={4} xs={12}>
 				</Grid>
 				<Grid item sm={4} xs={12}>
@@ -24,9 +49,19 @@ class login extends Component {
 			            Login
 			          </Typography>
 			           <img src={AppIcon} alt="monkey" className="image" />
-					    <form className={styles.form} noValidate autoComplete="off">
-				        <TextField id="email" name="email" type="email" label="Email" className={styles.textField} fullWidth/>
-				        <TextField id="password" name="password" type="password"  label="Password" className={styles.textField} fullWidth/>
+					    <form onSubmit={this.handleSubmit} className={styles.form} 
+						    noValidate >
+				        
+				        <TextField 
+					        id="email" name="email" type="email" 
+					        label="Email" className={styles.textField} 
+					        fullWidth onChange={this.handleChange}/>
+				        
+				        <TextField 
+					        id="password" name="password" type="password"  
+					        label="Password" className={styles.textField} 
+					        fullWidth onChange={this.handleChange}/>
+				        
 				        <Button
 			              type="submit"
 			              variant="contained"
@@ -35,6 +70,11 @@ class login extends Component {
 			            >
 			              Login
 			            </Button>
+			            <br />
+			            <small>
+			              dont have an account ? sign up <Link to="/signup">here</Link>
+			            </small>
+
 				    </form>
 				    </div>
 				</Grid>
@@ -45,4 +85,16 @@ class login extends Component {
 	}
 }
 
-export default login
+const mapStatesToProps = (state) => {
+	return { 
+		    authResponse:state.auth.authResponse
+		};
+}
+
+const mapDispatchToProps = (dispatch) => {
+	return {
+		loginUser:(creds, history) => dispatch(loginUser(creds, history))
+	}
+}
+
+export default connect(mapStatesToProps, mapDispatchToProps)(login)

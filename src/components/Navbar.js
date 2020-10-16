@@ -29,12 +29,12 @@ const Navbar = () => {
                       <MenuIcon />
                     </IconButton>
                     <Typography variant="h6" className={classes.title}>
-                        <Link to="/"> Social Sharing </Link>
+                        <Link to="/" className="appbar"> Social Sharing </Link>
                     </Typography>
-                    <Link to="/login">
+                    <Link to="/login" className="appbar">
                      <Button color="inherit">Login</Button>
                      </Link>
-                     <Link to="/register">
+                     <Link to="/register" className="appbar">
                      <Button color="inherit">Register</Button>
                      </Link>
                 </Toolbar>

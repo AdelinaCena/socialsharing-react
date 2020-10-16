@@ -7,14 +7,15 @@ import { createMuiTheme, MuiThemeProvider} from '@material-ui/core/styles';
 import home from './pages/home';
 import login from './pages/login';
 import register from './pages/register';
+import {PrivateRoute} from './components/PrivateRoute';
 
 const theme = createMuiTheme({
   palette: {
     primary: {
-      main: '#80cbc4',
+      main: '#424242',
     },
     secondary: {
-      main: '#ff8a80',
+      main: '#b71c1c',
     },
     
   },
@@ -28,9 +29,9 @@ function App() {
                 <Navbar />
                 <div className="container">
     	            <Switch>
-    		            <Route exact path="/" component={home} />
+                    <PrivateRoute exact path="/" component={home} />
     		            <Route exact path="/login" component={login} />
-    		            <Route exact path="/register" component={register} />
+                    <Route exact path="/register" component={register} />
     	            </Switch>
                 </div>
             </Router>

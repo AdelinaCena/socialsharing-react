@@ -13,8 +13,11 @@ code {
 }
 
 a {
-  color: white;
   text-decoration: none;
+}
+
+.appbar {
+   color: white;
 }
 
 .container {

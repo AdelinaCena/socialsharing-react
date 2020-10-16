@@ -1,6 +1,6 @@
 
 class HttpService {
-    url = "http://social.local/api";
+    url = "http://localhost:8000/api/auth";
 
     postData = async(item, added_url) => {
     	const token = await localStorage.getItem('user');
@@ -12,9 +12,11 @@ class HttpService {
     		},
     		body: JSON.stringify(item)
     	}
-        return fetch(this.url+"/"+added_url, requestOptions);
-    	// return fetch(this.url+"/"+added_url, requestOptions).then(response=>{response.json()});
 
+    	return fetch(this.url+"/"+added_url, requestOptions).then(
+            response => {
+                return response.json()
+            });
     }
 
     getData = async(added_url) => {
@@ -27,7 +29,7 @@ class HttpService {
     		}
     	}
 
-    	return fetch(this.url+"/"+added_url, requestOptions).then(response->response.json());
+    	return fetch(this.url+"/"+added_url, requestOptions).then(response=>{return response.json()});
 
     }
 }

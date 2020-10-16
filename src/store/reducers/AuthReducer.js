@@ -9,19 +9,33 @@ const AuthReducer = (state=initState, action) =>{
 				...state,
 				authResponse: 'Password is to short.'
 			};
-	    break;
-	    case 'SIGNUP_SUCCESS':
+		case 'SIGNUP_SUCCESS':
 			return{
 				...state,
 				authResponse: 'Your account is created successfully!.'
 			};
-		break;
+	    case 'CODE_ERROR':
+			return{
+				...state,
+				authResponse: 'There seems to be a problem please try again later.'
+			};
 		case 'SIGNUP_ERROR':
 			return{
 				...state,
 				authResponse: 'There is a problem .Please try again later .'
 			};
-	    break;
+		case 'LOGIN_SUCCESS':
+			return{
+				...state,
+				authResponse: 'Login  successfully!. Redirecting you to home.'
+			};
+		case 'LOGIN_ERROR':
+			return{
+				...state,
+				authResponse: 'There is a problem with login check your credentials .'
+			};
 	    default: return state;
 	}
 }
+
+export default AuthReducer
