@@ -1,4 +1,5 @@
 const initState = {
+	authenticated:false,
     authResponse:null
 }
 
@@ -12,6 +13,7 @@ const AuthReducer = (state=initState, action) =>{
 		case 'SIGNUP_SUCCESS':
 			return{
 				...state,
+				authenticated:true,
 				authResponse: 'Your account is created successfully!.'
 			};
 	    case 'CODE_ERROR':
@@ -27,6 +29,7 @@ const AuthReducer = (state=initState, action) =>{
 		case 'LOGIN_SUCCESS':
 			return{
 				...state,
+				authenticated:true,
 				authResponse: 'Login  successfully!. Redirecting you to home.'
 			};
 		case 'LOGIN_ERROR':

@@ -20,6 +20,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Navbar = () => {
+  const { authenticated } = this.props;
 	const classes = useStyles();
     return(
         <div className="appbar">
@@ -42,4 +43,10 @@ const Navbar = () => {
         </div>
     )
 }
-export default Navbar;
+
+
+const mapStateToProps = (state) => ({
+  authenticated: state.auth.authenticated
+});
+
+export default connect(mapStateToProps)(Navbar);

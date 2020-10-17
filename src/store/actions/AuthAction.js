@@ -10,7 +10,7 @@ export const signUp = (credentials) => {
 		SignUpService(credentials).then(res => {
 			console.log(res);
 
-			if(res.token !== null){
+			if(res.success){
 				localStorage.setItem("user", 'Bearer '+ res.token);
 				dispatch({type: 'SIGNUP_SUCCESS'});
 			} else {
@@ -37,8 +37,8 @@ export const loginUser = (credentials, history) => {
 		LoginService(credentials, history).then(res => {
 			console.log(res);
 
-			if(res.token !== null){
-				localStorage.setItem("user", 'Bearer'+res.token);
+			if(res.success){
+				localStorage.setItem("user", 'Bearer ' + res.token);
 				dispatch({type: 'LOGIN_SUCCESS'});
 				
 	                history.push("/");     
