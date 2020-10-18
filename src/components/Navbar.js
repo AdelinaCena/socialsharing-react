@@ -20,8 +20,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Navbar = () => {
-  const { authenticated } = this.props;
 	const classes = useStyles();
+  const user = localStorage.getItem('user');
     return(
         <div className="appbar">
 	        <AppBar position="static">
@@ -32,21 +32,18 @@ const Navbar = () => {
                     <Typography variant="h6" className={classes.title}>
                         <Link to="/" className="appbar"> Social Sharing </Link>
                     </Typography>
-                    <Link to="/login" className="appbar">
-                     <Button color="inherit">Login</Button>
-                     </Link>
-                     <Link to="/register" className="appbar">
-                     <Button color="inherit">Register</Button>
-                     </Link>
+                    {user == null?
+                      <Link to="/login" className="appbar">
+                       <Button color="inherit">Login</Button>
+                       </Link>
+                       <Link to="/register" className="appbar">
+                       <Button color="inherit">Register</Button>
+                       </Link>
+                      
+                    }
                 </Toolbar>
             </AppBar>
         </div>
     )
 }
-
-
-const mapStateToProps = (state) => ({
-  authenticated: state.auth.authenticated
-});
-
-export default connect(mapStateToProps)(Navbar);
+export default Navbar;

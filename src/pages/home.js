@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Post } from '../components/Post';
 import { getAllPosts } from '../store/actions/PostAction';
 import Grid from '@material-ui/core/Grid';
-
+import AddPost from '../components/AddPost'
 // redux
 import { connect } from 'react-redux'
 
@@ -22,7 +22,7 @@ class home extends Component {
 	    	<Grid container className="styles.form">
 			    <Grid item sm={2} xs={12}>
 				</Grid>
-				<Grid item sm={8} xs={12}>
+				<Grid item sm={8} xs={12} className="posts-view">
 				    <div> 
 				    	<Post posts={loadPosts}/>
 				    </div>
