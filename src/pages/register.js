@@ -25,7 +25,7 @@ class register extends Component {
         	name:"",
         	email:"",
         	password:"",
-        	confirm_password:"",
+        	password_confirmation:"",
         }
 	}
 
@@ -70,10 +70,23 @@ class register extends Component {
 						        fullWidth onChange={this.handleChange}/>
 					        
 					        <TextField 
-						        id="confirm_password" name="confirm_password" 
+						        id="password_confirmation" name="password_confirmation" 
 						        type="password" label="Confirm Password" 
 						        className={styles.textField} fullWidth
 						        onChange={this.handleChange}/>
+    				        <div className="error-message"> 
+    				            {authResponse != null && authResponse.errors.hasOwnProperty('password')?  
+    				        	  authResponse.errors.password
+
+    				            : null }
+				            </div>
+
+				            <div className="error-message"> 
+    				            {authResponse != null ?  
+    				        	  authResponse.errors.email
+
+    				            : null }
+				            </div>
 
 					        <Button
 				              type="submit"

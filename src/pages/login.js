@@ -39,6 +39,7 @@ class login extends Component {
 	}
 
 	render() {
+		const { authResponse } = this.props;
 		return(
 			<Grid container className="styles.form">
 			    <Grid item sm={4} xs={12}>
@@ -61,7 +62,7 @@ class login extends Component {
 					        id="password" name="password" type="password"  
 					        label="Password" className={styles.textField} 
 					        fullWidth onChange={this.handleChange}/>
-				        
+				        < div className="error-message"> {authResponse? authResponse.message : null }</div>
 				        <Button
 			              type="submit"
 			              variant="contained"

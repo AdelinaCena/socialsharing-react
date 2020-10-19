@@ -5,16 +5,11 @@ const initState = {
 
 const AuthReducer = (state=initState, action) =>{
 	switch(action.type){
-		case 'SHORT_PASSWORD':
-			return{
-				...state,
-				authResponse: 'Password is to short.'
-			};
 		case 'SIGNUP_SUCCESS':
 			return{
 				...state,
 				authenticated:true,
-				authResponse: 'Your account is created successfully!.'
+				authResponse: action.res
 			};
 	    case 'CODE_ERROR':
 			return{
@@ -24,7 +19,7 @@ const AuthReducer = (state=initState, action) =>{
 		case 'SIGNUP_ERROR':
 			return{
 				...state,
-				authResponse: 'There is a problem .Please try again later .'
+				authResponse: action.res
 			};
 		case 'LOGIN_SUCCESS':
 			return{
@@ -35,7 +30,7 @@ const AuthReducer = (state=initState, action) =>{
 		case 'LOGIN_ERROR':
 			return{
 				...state,
-				authResponse: 'There is a problem with login check your credentials .'
+				authResponse: action.res
 			};
 		case 'LOGOUT_SUCCESS':
 			return{

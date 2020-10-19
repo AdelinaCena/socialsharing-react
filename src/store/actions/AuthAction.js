@@ -3,18 +3,15 @@ import { Route, Redirect } from 'react-router-dom';
 
 export const signUp = (credentials, history) => {
 	return (dispatch) => {
-		if (credentials.password.length < 6) {
-			return dispatch({type: 'SHORT_PASSWORD'});
-		}
 
 		SignUpService(credentials, history).then(res => {
 			console.log(res);
 
-			if(res.hasOwnProperty('success') && res.success){
+			if(res.success){
 				localStorage.setItem("user", 'Bearer ' + res.token);
 				localStorage.setItem("user_id", res.user_id);
 				history.push("/");  
-				dispatch({type: 'SIGNUP_SUCCESS'});
+				dispatch({type: 'SIGNUP_SUCCESS', res});
 			} else {
 				dispatch({type:'SIGNUP_ERROR', res});
 			}
@@ -31,18 +28,14 @@ export const signUp = (credentials, history) => {
 
 export const loginUser = (credentials, history) => {
 	return (dispatch) => {
-		if (credentials.password.length < 6) {
-
-			return dispatch({type: 'SHORT_PASSWORD'});
-		}
-
+		
 		LoginService(credentials, history).then(res => {
 			console.log(res);
 
-			if(res.hasOwnProperty('success') && res.success){
+			if(res.success){
 				localStorage.setItem("user", 'Bearer ' + res.token);
 				localStorage.setItem("user_id", res.user_id);
-				dispatch({type: 'LOGIN_SUCCESS'});
+				dispatch({type: 'LOGIN_SUCCESS', res});
 				
 	                history.push("/");     
 			} else {

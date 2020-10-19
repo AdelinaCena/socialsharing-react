@@ -12,3 +12,8 @@
 	width: 100%;
 	color: white;
 }
+
+div.error-message{
+	color: red;
+	margin-top: 10px;
+}
