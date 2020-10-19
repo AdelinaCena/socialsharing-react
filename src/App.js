@@ -7,7 +7,9 @@ import { createMuiTheme, MuiThemeProvider} from '@material-ui/core/styles';
 import home from './pages/home';
 import login from './pages/login';
 import register from './pages/register';
-import {PrivateRoute} from './components/PrivateRoute';
+import create from './pages/post/create';
+import edit from './pages/post/edit'
+import { Unauthorized, PrivateRoute } from './util/redirections';
 
 const theme = createMuiTheme({
   palette: {
@@ -30,8 +32,11 @@ function App() {
                 <div className="container">
     	            <Switch>
                     <PrivateRoute exact path="/" component={home} />
-    		            <Route exact path="/login" component={login} />
-                    <Route exact path="/register" component={register} />
+    		            <Unauthorized exact path="/login" component={login} />
+                    <Unauthorized exact path="/register" component={register} />
+                    <PrivateRoute exact path="/posts/create" component={create} />
+                    <PrivateRoute exact path="/posts/:post" component={edit} />
+                    <Route exact path="/logout" />
     	            </Switch>
                 </div>
             </Router>

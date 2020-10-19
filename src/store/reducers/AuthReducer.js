@@ -1,6 +1,6 @@
 const initState = {
-	authenticated:false,
-    authResponse:null
+	authenticated: false,
+    authResponse: null
 }
 
 const AuthReducer = (state=initState, action) =>{
@@ -36,6 +36,11 @@ const AuthReducer = (state=initState, action) =>{
 			return{
 				...state,
 				authResponse: 'There is a problem with login check your credentials .'
+			};
+		case 'LOGOUT_SUCCESS':
+			return{
+				...state,
+				authResponse: 'Logout successfully! .'
 			};
 	    default: return state;
 	}

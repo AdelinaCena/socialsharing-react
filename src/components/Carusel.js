@@ -10,7 +10,7 @@ const Carusel = (props) =>  {
     	<div>
     	     <AliceCarousel>
 				{media && media.hasOwnProperty('media')? media.media.map(row => (
-				      <video width="100%" controls>
+				      <video width="100%" controls key={row.id}>
 						  <source src="mov_bbb.mp4" type="video/mp4"/>
 						  <source src="mov_bbb.ogg" type="video/ogg"/>
 						  Your browser does not support HTML video.

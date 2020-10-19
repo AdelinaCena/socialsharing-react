@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
 
 const Navbar = () => {
 	const classes = useStyles();
-  const user = localStorage.getItem('user');
+  const hasUser = localStorage.getItem('user');
     return(
         <div className="appbar">
 	        <AppBar position="static">
@@ -32,15 +32,20 @@ const Navbar = () => {
                     <Typography variant="h6" className={classes.title}>
                         <Link to="/" className="appbar"> Social Sharing </Link>
                     </Typography>
-                    {user == null?
+                    { hasUser ? 
+                        <a type="submit" href="/logout" className="appbar">
+                            Logout
+                        </a>
+                    :
+                    <>
                       <Link to="/login" className="appbar">
-                       <Button color="inherit">Login</Button>
-                       </Link>
-                       <Link to="/register" className="appbar">
-                       <Button color="inherit">Register</Button>
-                       </Link>
-                      
-                    }
+                         <Button color="inherit">Login</Button>
+                         </Link>
+                         <Link to="/register" className="appbar">
+                         <Button color="inherit">Register</Button>
+                         </Link> 
+                       </>
+                     }
                 </Toolbar>
             </AppBar>
         </div>

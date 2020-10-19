@@ -31,7 +31,7 @@ class register extends Component {
 
 	handleSubmit = (e) =>{
 		e.preventDefault();
-		this.props.signUp(this.state);
+		this.props.signUp(this.state, this.props.history);
 	}
 
 	handleChange = (e) => {
@@ -100,12 +100,12 @@ class register extends Component {
 const mapStatesToProps = (state) => {
 	return { 
 		authResponse:state.auth.authResponse
-		};
+	};
 }
 
 const mapDispatchToProps = (dispatch) => {
 	return {
-		signUp:(creds) => dispatch(signUp(creds))
+		signUp:(creds, history) => dispatch(signUp(creds, history))
 	}
 }
 

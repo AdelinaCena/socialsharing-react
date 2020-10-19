@@ -15,11 +15,14 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 import ShareIcon from '@material-ui/icons/Share';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
+import EditIcon from '@material-ui/icons/Edit';
 import Carusel from './Carusel';
+import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
   root: {
     maxWidth: 600,
+    marginBottom: '20px'
   },
   media: {
     height: 0,
@@ -46,12 +49,17 @@ export const Post = (props) => {
     const [expanded, setExpanded] = React.useState(false);
 
     const handleExpandClick = () => {
-    setExpanded(!expanded);
-  };
-    const loadPosts = props.posts;
-    return (
+      setExpanded(!expanded);
+    };
+    const editPost = (props, postId) =>{
+      props.history.push("posts/" + postId);
+    }
 
-    <div> 
+    const loadPosts = props.posts;
+    const authId = localStorage.getItem('user_id');
+    
+    return (
+    <div>
     {loadPosts && loadPosts.hasOwnProperty('allPosts')? loadPosts.allPosts.map(row => (
 
 	  <Card key= { row.id } className={classes.root}>
@@ -72,14 +80,12 @@ export const Post = (props) => {
 
       {row.media[1]? 
         <Carusel media={row}/> : null
-
       }
       
       <CardContent>
         <Typography variant="body2" color="textSecondary" component="p">
-          {row.title} <br/>
-          This impressive paella is a perfect party dish and a fun meal to cook together with your
-          guests. Add 1 cup of frozen peas along with the mussels, if you like.
+          { row.title } <br/>
+          { row.text }
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
@@ -89,6 +95,12 @@ export const Post = (props) => {
         <IconButton aria-label="share">
           <ShareIcon />
         </IconButton>
+        {row.user.id == authId ? 
+        <Link to={'/posts/'+row.id}>
+          <EditIcon ></EditIcon>
+        </Link>
+        : ''
+        }
         <IconButton
           className={clsx(classes.expand, {
             [classes.expandOpen]: expanded,
@@ -105,7 +117,6 @@ export const Post = (props) => {
           <Typography paragraph>{row.title}</Typography>
           <Typography paragraph>
               {row.text}
-            minutes.
           </Typography>
         </CardContent>
       </Collapse>
