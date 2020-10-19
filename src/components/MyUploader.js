@@ -14,16 +14,16 @@ import { addMediaToStore } from '../store/actions/MediaAction'
 			}
 	}
 	// specify upload params and url for your files
-		getUploadParams = ({ meta }) => {
-			this.setState({
-				media : meta
-			});
-			console.log(this.state.media)
-			return { url: 'https://httpbin.org/post' } 
-		}
+	getUploadParams = ({ meta }) => {
+		console.log(this.state.media)
+		return { url: 'https://httpbin.org/post' } 
+	}
 	
 	// called every time a file's `status` changes
 	handleChangeStatus = ({ meta, file }, status) => { 
+		this.setState({
+			media : meta
+		});
 	}
 	
 	// receives array of files that are done uploading when submit button is clicked
