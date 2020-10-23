@@ -10,7 +10,7 @@ const Carusel = (props) =>  {
     	<div>
     	     <AliceCarousel>
 				{media? media.media.map(row => (
-					<img width="500" height="200" key={row.id} src={row.url}/>
+					<img width="600" height="300" key={row.id} src={row.url}/>
 			    )) : null}
 		    </AliceCarousel>
     	</div>

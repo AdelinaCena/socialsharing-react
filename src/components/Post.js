@@ -1,6 +1,5 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import clsx from 'clsx';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
 import CardMedia from '@material-ui/core/CardMedia';
@@ -18,11 +17,14 @@ import MoreVertIcon from '@material-ui/icons/MoreVert';
 import EditIcon from '@material-ui/icons/Edit';
 import Carusel from './Carusel';
 import { Link } from 'react-router-dom';
+import '../css/post.css'
 
 const useStyles = makeStyles((theme) => ({
   root: {
     maxWidth: 600,
-    marginBottom: '20px'
+    marginBottom: '20px',
+    backgroundColor: '#F0F8FF',
+
   },
   media: {
     height: 0,
@@ -39,7 +41,7 @@ const useStyles = makeStyles((theme) => ({
     transform: 'rotate(180deg)',
   },
   avatar: {
-    backgroundColor: red[500],
+    backgroundColor: '#000000',
   },
 }));
 
@@ -78,9 +80,9 @@ export const Post = (props) => {
         subheader={row.created_at}
       />
 
-      {row.media[0]? 
-        <Carusel media={row}/> : null
-      }
+        {row.media[0]? 
+          <Carusel media={row}/> : null
+        }
       
       <CardContent>
         <Typography variant="body2" color="textSecondary" component="p">
@@ -95,25 +97,7 @@ export const Post = (props) => {
         </Link>
         : ''
         }
-        <IconButton
-          className={clsx(classes.expand, {
-            [classes.expandOpen]: expanded,
-          })}
-          onClick={handleExpandClick}
-          aria-expanded={expanded}
-          aria-label="show more"
-        >
-          <ExpandMoreIcon />
-        </IconButton>
       </CardActions>
-      <Collapse in={expanded} timeout="auto" unmountOnExit>
-        <CardContent>
-          <Typography paragraph>{row.title}</Typography>
-          <Typography paragraph>
-              {row.text}
-          </Typography>
-        </CardContent>
-      </Collapse>
     </Card>
 
     )) : null }

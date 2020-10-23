@@ -5,7 +5,8 @@ const initState = {
 		title: '',
 		text: '',
 	},
-	media: []
+	media: [],
+	new_file: []
 }
 
 const PostReducer = (state = initState, action) => {
