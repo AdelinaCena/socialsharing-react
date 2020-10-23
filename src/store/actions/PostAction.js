@@ -8,7 +8,6 @@ export const getAllPosts = () => (dispatch) => {
 	}
 
 	).catch(error => {
-		console.log(error)
 		dispatch({type:'CODE_ERROR', error})
 	});
 }
@@ -17,13 +16,11 @@ export const addPost = (postData) => (dispatch) => {
 	CreatePost(postData).then(res => {
 		if(res.success){
 			dispatch({type:'ADD_POST', res})
-
 			return res;
 		}
 	}
 
 	).catch(error => {
-		console.log(error)
 		dispatch({type:'CODE_ERROR', error})
 	});
 }
@@ -31,13 +28,11 @@ export const addPost = (postData) => (dispatch) => {
 export const getPost = (postId) => (dispatch) => {
 	GetSinglePost(postId).then(res => {
 		if(res.success){
-			console.log('success')
 			dispatch({type:'GET_SINGLE_POST', res})
 		}
 	}
 
 	).catch(error => {
-		console.log(error)
 		dispatch({type:'CODE_ERROR', error})
 	});
 }
@@ -45,7 +40,6 @@ export const getPost = (postId) => (dispatch) => {
 export const updatePost = (postData, postId) => (dispatch) => {
 	UpdatePost(postData, postId).then(res => {
 		if(res.success){
-			console.log(res)
 			dispatch({type:'UPDATE_POST', res})
 
 			return res;
@@ -53,7 +47,6 @@ export const updatePost = (postData, postId) => (dispatch) => {
 	}
 
 	).catch(error => {
-		console.log(error)
 		dispatch({type:'CODE_ERROR', error})
 	});
 }

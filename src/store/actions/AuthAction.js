@@ -3,9 +3,7 @@ import { Route, Redirect } from 'react-router-dom';
 
 export const signUp = (credentials, history) => {
 	return (dispatch) => {
-
 		SignUpService(credentials, history).then(res => {
-			console.log(res);
 
 			if(res.success){
 				localStorage.setItem("user", 'Bearer ' + res.token);
@@ -15,23 +13,16 @@ export const signUp = (credentials, history) => {
 			} else {
 				dispatch({type:'SIGNUP_ERROR', res});
 			}
-		}
-
-		).catch(error => {
-			console.log(error)
+		}).catch(error => {
 			dispatch({type:'CODE_ERROR', error})
 		});
-		
 	}
 }
 
 
 export const loginUser = (credentials, history) => {
 	return (dispatch) => {
-		
 		LoginService(credentials, history).then(res => {
-			console.log(res);
-
 			if(res.success){
 				localStorage.setItem("user", 'Bearer ' + res.token);
 				localStorage.setItem("user_id", res.user_id);
@@ -41,26 +32,16 @@ export const loginUser = (credentials, history) => {
 			} else {
 				dispatch({type:'LOGIN_ERROR', res});
 			}
-		}
-
-		);
-		
+		});
 	}
 }
 
 export const logoutUser = () => {
 	return (dispatch) => {
 		LogoutService().then(res => {
-			console.log(res);
-
-			if(res.hasOwnProperty('success') && res.success){
-				
-				dispatch({type: 'LOGOUT_SUCCESS'});
-				   
+			if(res.success){
+				dispatch({type: 'LOGOUT_SUCCESS'});   
 			} 
-		}
-
-		);
-		
+		});
 	}
 }

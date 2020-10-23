@@ -15,7 +15,6 @@ class home extends Component {
 
 	componentDidMount = async() => {
 		await this.props.getAllPosts();
-		console.log(this.props);
 	}
 
     render() {

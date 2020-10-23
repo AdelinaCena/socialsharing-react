@@ -7,6 +7,9 @@ import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import { Link } from 'react-router-dom';
+import { logoutUser } from '../store/actions/AuthAction';
+import { connect } from 'react-redux'
+
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -19,9 +22,18 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+
 const Navbar = () => {
+
+    const handleSubmit = () => {
+        const token = localStorage.removeItem('user'); 
+        const userId= localStorage.removeItem('user_id'); 
+    }
+
 	const classes = useStyles();
+
   const hasUser = localStorage.getItem('user');
+
     return(
         <div className="appbar">
 	        <AppBar position="static">
@@ -32,10 +44,11 @@ const Navbar = () => {
                     <Typography variant="h6" className={classes.title}>
                         <Link to="/" className="appbar"> Social Sharing </Link>
                     </Typography>
+
                     { hasUser ? 
-                        <a type="submit" href="/logout" className="appbar">
-                            Logout
-                        </a>
+                        <Button type="submit" className="appbar" onClick={handleSubmit}>
+                            LogOut
+                        </Button>
                     :
                     <>
                       <Link to="/login" className="appbar">
@@ -46,9 +59,22 @@ const Navbar = () => {
                          </Link> 
                        </>
                      }
+
                 </Toolbar>
             </AppBar>
         </div>
     )
 }
-export default Navbar;
+
+const mapStatesToProps = (state) => {
+  return { 
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    logoutUser:() => dispatch(logoutUser())
+  }
+}
+
+export default connect(mapStatesToProps, mapDispatchToProps)(Navbar)

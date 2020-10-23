@@ -16,10 +16,13 @@ a {
   text-decoration: none;
 }
 
-.appbar {
+.appbar ,Button.appbar {
    color: white;
 }
 
+.MuiPaper-root{
+  background-color: #000000;
+}
 .container {
 	padding-right: 15px;
 	padding-left: 15px;

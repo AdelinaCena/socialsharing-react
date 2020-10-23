@@ -78,7 +78,7 @@ export const Post = (props) => {
         subheader={row.created_at}
       />
 
-      {row.media[1]? 
+      {row.media[0]? 
         <Carusel media={row}/> : null
       }
       
@@ -89,12 +89,6 @@ export const Post = (props) => {
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
-        <IconButton aria-label="add to favorites">
-          <FavoriteIcon />
-        </IconButton>
-        <IconButton aria-label="share">
-          <ShareIcon />
-        </IconButton>
         {row.user.id == authId ? 
         <Link to={'/posts/'+row.id}>
           <EditIcon ></EditIcon>

@@ -9,13 +9,9 @@ const Carusel = (props) =>  {
     return (
     	<div>
     	     <AliceCarousel>
-				{media && media.hasOwnProperty('media')? media.media.map(row => (
-				      <video width="100%" controls key={row.id}>
-						  <source src="mov_bbb.mp4" type="video/mp4"/>
-						  <source src="mov_bbb.ogg" type="video/ogg"/>
-						  Your browser does not support HTML video.
-						</video>
-					)) : null}
+				{media? media.media.map(row => (
+					<img width="500" height="200" key={row.id} src={row.url}/>
+			    )) : null}
 		    </AliceCarousel>
     	</div>
     	);

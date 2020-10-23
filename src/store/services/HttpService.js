@@ -14,7 +14,6 @@ class HttpService {
     		},
     		body: JSON.stringify(item)
     	}
-
     	return fetch(this.url+"/"+added_url, requestOptions).then(
             response => {
                 return response.json()
@@ -30,8 +29,25 @@ class HttpService {
     			'Content-Type': 'Application/json',
     		}
     	}
+    	return fetch(this.url+"/"+added_url, requestOptions
+            ).then(response=>{return response.json()});
+    }
 
-    	return fetch(this.url+"/"+added_url, requestOptions).then(response=>{return response.json()});
+
+    postFormData = async(item, added_url, type = 'POST') => {
+        
+        const token = await localStorage.getItem('user');
+        let requestOptions = {
+            method: type,
+            headers:{
+                'Authorization': token,
+            },
+            body: (item)
+        }
+        return fetch(this.url+"/"+added_url, requestOptions).then(
+            response => {
+                return response.json()
+            });
     }
 }
 

@@ -11,7 +11,7 @@ export const PrivateRoute = ({component:Component, ...rest}) => (
 
 );
 
-export const Unauthorized = ({component:Component, ...rest}) => (
+export const Public = ({component:Component, ...rest}) => (
     <Route {...rest } render={ props=>(
         localStorage.getItem('user') ?
         <Redirect to={{pathname: '/', state:{from:props.location}}} />
