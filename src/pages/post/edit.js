@@ -4,7 +4,7 @@ import TextField from '@material-ui/core/TextField';
 import TextareaAutosize from '@material-ui/core/TextareaAutosize';
 import Button from '@material-ui/core/Button';
 import ReactDOMServer from 'react-dom/server';
-import { getPost, updatePost, deleteFile} from '../../store/actions/PostAction';
+import { getPost, updatePost, deletePost, deleteFile} from '../../store/actions/PostAction';
 import 'react-dropzone-uploader/dist/styles.css'
 import Dropzone from 'react-dropzone-uploader'
 import '../../css/post.css'
@@ -39,6 +39,12 @@ class edit extends Component {
 
         console.log(this.state)
 	}
+
+    // delete post function
+    handleDelete = () => {
+        this.props.deletePost(this.props.match.params.post);
+        this.props.history.push('/');
+    }
 
     // called every time a file's `status` changes
     handleChangeStatus = ({ meta, file }, status) => {
@@ -77,6 +83,10 @@ class edit extends Component {
                             <Button  className= "post-button" variant="contained" color="primary" onClick={this.handleSubmit}>
                                 Update post
                             </Button>
+
+                            <Button  className= "post-button" variant="contained" color="primary" onClick={this.handleDelete}>
+                                Delete Post
+                            </Button>
                         </form>
                     </div>
                 </Grid>
@@ -107,6 +117,7 @@ const mapDispatchToProps = (dispatch) => {
 	return {
         getPost:(postId) => dispatch(getPost(postId)),
         updatePost:(post, postId) => dispatch(updatePost(post, postId)),
+        deletePost:(postId) => dispatch(deletePost(postId)),
         deleteFile:(fileId) => dispatch(deleteFile(fileId))
 	}
 }

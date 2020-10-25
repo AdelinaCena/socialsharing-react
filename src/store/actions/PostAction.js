@@ -1,4 +1,11 @@
-import { AllPosts, GetSinglePost, CreatePost, UpdatePost , DeletePostFile} from '../services/PostService';
+import { 
+	AllPosts, 
+	GetSinglePost, 
+	CreatePost, 
+	UpdatePost, 
+	DeletePostById,  
+	DeletePostFile
+} from '../services/PostService';
 
 export const getAllPosts = () => (dispatch) => {
 	AllPosts().then(res => {
@@ -50,8 +57,21 @@ export const updatePost = (postData, postId) => (dispatch) => {
 	});
 }
 
-export const deleteFile = (postId) => (dispatch) => {
-	DeletePostFile(postId).then(res => {
+export const deletePost = (postId) => (dispatch) => {
+	DeletePostById(postId).then(res => {
+		if(res.success){
+			dispatch({type:'UPDATE_POST', res})
+			return res;
+		}
+	}
+	
+	).catch(error => {
+		dispatch({type:'CODE_ERROR', error})
+	});
+}
+
+export const deleteFile = (fileId) => (dispatch) => {
+	DeletePostFile(fileId).then(res => {
 		if(res.success){
 			dispatch({type:'UPDATE_POST', res})
 			return res;

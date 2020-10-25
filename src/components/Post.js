@@ -49,20 +49,13 @@ const useStyles = makeStyles((theme) => ({
 
 export const Post = (props) => {
 	const classes = useStyles();
-    const [expanded, setExpanded] = React.useState(false);
-
-    const handleExpandClick = () => {
-      setExpanded(!expanded);
-    };
+    
     const editPost = (props, postId) =>{
       props.history.push("posts/" + postId);
     }
 
-    const handleDelete = () => {
-        console.log("i am here")
-    }
-
     const loadPosts = props.posts;
+
     const authId = localStorage.getItem('user_id');
     
     return (
@@ -78,10 +71,12 @@ export const Post = (props) => {
         }
         action={
             <div>
-            <Link className="edit-icon" to={'/posts/'+row.id}>
-              <EditIcon />
-            </Link>
-                <DeleteIcon  onClick={handleDelete}/>
+               {row.user.id == authId ? 
+                    <Link to={'/posts/'+row.id}>
+                      <EditIcon ></EditIcon>
+                    </Link>
+                    : ''
+                }
             </div>
         }
         title={row.title}

@@ -28,7 +28,7 @@ class home extends Component {
 						Add post
 					</Button>
 				    <div style={{marginTop:'20px'}}> 
-				    	<Post posts={loadPosts}/>
+				    	<Post posts={loadPosts} data={this.props}/>
 				    </div>
 				</Grid>
 				<Grid item sm={2} xs={12} />
@@ -41,7 +41,7 @@ class home extends Component {
 
 const mapDispatchToProps = (dispatch) => {
 	return {
-		getAllPosts:() => dispatch(getAllPosts())
+		getAllPosts:() => dispatch(getAllPosts()),
 	}
 }
 

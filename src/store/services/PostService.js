@@ -31,10 +31,20 @@ export const UpdatePost = (post, postId) => {
 	}).catch(error => console.log(error));
 }
 
-export const DeletePostFile = (fileId) => {
+export const DeletePostById = (postID) => {
 	const http = new HttpService();
 	
-	return http.postData(null,'file/'+fileId, 'DELETE').then(data => {
+	return http.postData(null,'posts/'+postID, 'DELETE').then(data => {
 		return data;
 	}).catch(error => console.log(error));
 }
+
+export const DeletePostFile = (fileId) => {
+	const http = new HttpService();
+	
+	return http.postData(null,'files/'+fileId, 'DELETE').then(data => {
+		return data;
+	}).catch(error => console.log(error));
+}
+
+
