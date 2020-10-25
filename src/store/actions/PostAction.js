@@ -50,15 +50,14 @@ export const updatePost = (postData, postId) => (dispatch) => {
 	});
 }
 
-export const deleteFile = (postData, postId) => (dispatch) => {
+export const deleteFile = (postId) => (dispatch) => {
 	DeletePostFile(postId).then(res => {
 		if(res.success){
 			dispatch({type:'UPDATE_POST', res})
-
 			return res;
 		}
 	}
-
+	
 	).catch(error => {
 		dispatch({type:'CODE_ERROR', error})
 	});

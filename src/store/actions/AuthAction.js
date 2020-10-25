@@ -8,7 +8,11 @@ export const signUp = (credentials, history) => {
 			if(res.success){
 				localStorage.setItem("user", 'Bearer ' + res.token);
 				localStorage.setItem("user_id", res.user_id);
-				history.push("/");  
+
+				setTimeout(function() {
+		          window.location.reload();
+		        }, 1000);  
+		        
 				dispatch({type: 'SIGNUP_SUCCESS', res});
 			} else {
 				dispatch({type:'SIGNUP_ERROR', res});
@@ -28,7 +32,9 @@ export const loginUser = (credentials, history) => {
 				localStorage.setItem("user_id", res.user_id);
 				dispatch({type: 'LOGIN_SUCCESS', res});
 				
-	                history.push("/");     
+                setTimeout(function() {
+		          window.location.reload();
+		        }, 1000);     
 			} else {
 				dispatch({type:'LOGIN_ERROR', res});
 			}

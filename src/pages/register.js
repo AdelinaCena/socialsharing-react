@@ -32,6 +32,7 @@ class register extends Component {
 	handleSubmit = (e) =>{
 		e.preventDefault();
 		this.props.signUp(this.state, this.props.history);
+		console.log(this.props)
 	}
 
 	handleChange = (e) => {
@@ -41,7 +42,7 @@ class register extends Component {
 	}
 
 	render() {
-		const {authResponse} = this.props;
+		const { authResponse } = this.props;
 		return(
 			<Grid container className="styles.form">
 			    <Grid item sm={4} xs={12}>
@@ -75,15 +76,8 @@ class register extends Component {
 						        className={styles.textField} fullWidth
 						        onChange={this.handleChange}/>
     				        <div className="error-message"> 
-    				            {authResponse != null && authResponse.errors.hasOwnProperty('password')?  
-    				        	  authResponse.errors.password
-
-    				            : null }
-				            </div>
-
-				            <div className="error-message"> 
-    				            {authResponse != null ?  
-    				        	  authResponse.errors.email
+    				            {authResponse != null?  
+    				        	  authResponse
 
     				            : null }
 				            </div>

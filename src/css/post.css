@@ -2,10 +2,15 @@
 	margin: 30px; 
 }
 
+a.edit-icon:hover, a.edit-icon{
+  color: #000000
+}
+
 .grave {
    margin: 30px ;
    padding-left: 5%;
    text-align: center;
+   border-spacing: 10px;
 }
 
 .post-button{
@@ -25,4 +30,8 @@
   left: 0;
   width: 100%;
   height: 100%;
+}
+
+.file-media{
+  margin-top: 50px;
 }

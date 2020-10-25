@@ -23,16 +23,23 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-const Navbar = () => {
+const Navbar = (props) => {
 
-    const handleSubmit = () => {
+    const handleSubmit = (props) => {
         const token = localStorage.removeItem('user'); 
-        const userId= localStorage.removeItem('user_id'); 
+        const userId= localStorage.removeItem('user_id');
+
+        window.open('/', '_self')
+
+        // console.log(props);
+
+        // props.history.push('/');
     }
 
 	const classes = useStyles();
 
   const hasUser = localStorage.getItem('user');
+
 
     return(
         <div className="appbar">

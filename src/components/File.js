@@ -18,16 +18,6 @@ const useStyles = makeStyles((theme) => ({
     height: 0,
     paddingTop: '56.25%', // 16:9
   },
-  expand: {
-    transform: 'rotate(0deg)',
-    marginLeft: 'auto',
-    transition: theme.transitions.create('transform', {
-      duration: theme.transitions.duration.shortest,
-    }),
-  },
-  expandOpen: {
-    transform: 'rotate(180deg)',
-  },
   avatar: {
     backgroundColor: red[500],
   },
@@ -39,13 +29,18 @@ export const File = (props) => {
     const file = props.file
     const authId = localStorage.getItem('user_id');
     const onClick = () => {
-        console.log(props.deleteFile); 
+        const pathname =  props.data.history.location.pathname;
+        props.data.deleteFile(file.id)
+        
+        setTimeout(function() {
+          window.location.reload();
+        }, 1500);
     }
     
     return (
     <div>
-      <Card className={classes.root}>
-      <CardMedia
+        <Card className={classes.root}>
+        <CardMedia
         className={classes.media}
         image={ file.url }
         title="Paella dish"

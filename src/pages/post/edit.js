@@ -49,7 +49,8 @@ class edit extends Component {
 
     render() {
         const { post } = this.props.singlePost 
-        const { media } = this.props.singlePost
+        const { media } = this.props.singlePost;
+        console.log(this.props);
         
 	    return (
             <Grid container className="styles.form">
@@ -79,16 +80,17 @@ class edit extends Component {
                         </form>
                     </div>
                 </Grid>
-                <Grid item sm={4} xs={12}>
-                    <div className="grave"> 
-                        <h3>Post Media</h3>
+                <Grid item sm={1} xs={12}>
+                </Grid>
+                <Grid item sm={3} xs={12}>
+                    <div className="file-media"> 
                             {media? media.map(row => (
                                 <File key={row.id} file={row}  data={this.props}/>
                             )) : null }
                     </div> 
-                     
                 </Grid>
             </Grid>
+
            
         );
 	}

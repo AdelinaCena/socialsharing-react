@@ -34,7 +34,7 @@ export const UpdatePost = (post, postId) => {
 export const DeletePostFile = (fileId) => {
 	const http = new HttpService();
 	
-	return http.postData('file/'+fileId+'/delete', 'DELETE').then(data => {
+	return http.postData(null,'file/'+fileId, 'DELETE').then(data => {
 		return data;
 	}).catch(error => console.log(error));
 }

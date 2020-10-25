@@ -18,12 +18,13 @@ import EditIcon from '@material-ui/icons/Edit';
 import Carusel from './Carusel';
 import { Link } from 'react-router-dom';
 import '../css/post.css'
+import DeleteIcon from '@material-ui/icons/Delete';
 
 const useStyles = makeStyles((theme) => ({
   root: {
     maxWidth: 600,
     marginBottom: '20px',
-    backgroundColor: '#F0F8FF',
+    backgroundColor: '#FFFFFF',
 
   },
   media: {
@@ -57,6 +58,10 @@ export const Post = (props) => {
       props.history.push("posts/" + postId);
     }
 
+    const handleDelete = () => {
+        console.log("i am here")
+    }
+
     const loadPosts = props.posts;
     const authId = localStorage.getItem('user_id');
     
@@ -72,9 +77,12 @@ export const Post = (props) => {
           </Avatar>
         }
         action={
-          <IconButton aria-label="settings">
-            <MoreVertIcon />
-          </IconButton>
+            <div>
+            <Link className="edit-icon" to={'/posts/'+row.id}>
+              <EditIcon />
+            </Link>
+                <DeleteIcon  onClick={handleDelete}/>
+            </div>
         }
         title={row.title}
         subheader={row.created_at}
@@ -90,14 +98,6 @@ export const Post = (props) => {
           { row.text }
         </Typography>
       </CardContent>
-      <CardActions disableSpacing>
-        {row.user.id == authId ? 
-        <Link to={'/posts/'+row.id}>
-          <EditIcon ></EditIcon>
-        </Link>
-        : ''
-        }
-      </CardActions>
     </Card>
 
     )) : null }
