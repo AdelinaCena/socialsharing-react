@@ -75,12 +75,6 @@ class register extends Component {
 						        type="password" label="Confirm Password" 
 						        className={styles.textField} fullWidth
 						        onChange={this.handleChange}/>
-    				        <div className="error-message"> 
-    				            {authResponse != null?  
-    				        	  authResponse
-
-    				            : null }
-				            </div>
 
 					        <Button
 				                type="submit"

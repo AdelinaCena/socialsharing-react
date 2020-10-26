@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 // ui import 
-import { TextField, TextareaAutosize, Button, Grid } from '@material-ui/core';
+import { 
+    TextField, TextareaAutosize, Grid, Button, 
+    Dialog, DialogActions, DialogContent, 
+    DialogContentText, DialogTitle } from '@material-ui/core';
 // actions
 import { getPost, updatePost, deletePost } from '../../store/actions/PostAction';
 import { addFile, deleteFile } from '../../store/actions/MediaAction';
@@ -10,15 +13,17 @@ import 'react-dropzone-uploader/dist/styles.css'
 import Dropzone from 'react-dropzone-uploader'
 // css
 import '../../css/post.css'
-// file componet 
-import  { File } from  '../../components/File'
+// file card componet 
+import  { FileCard } from  '../../components/FileCard'
+import DeleteIcon from '@material-ui/icons/Delete';
 
 class edit extends Component {
     
 	constructor(props) {
         super(props);
         this.state = {
-            newFile:[]
+            newFile:[],
+            open: false
         }
 
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -72,9 +77,21 @@ class edit extends Component {
     }
 
     // delete post function
-    handleDelete = () => {
+    handleDeleteConfirm = () => {
         this.props.deletePost(this.props.match.params.post);
         this.props.history.push('/');
+    }
+    
+    handleClickOpen = () => {
+        this.setState({
+            open:true
+        })
+    };
+
+    handleClose = () => {
+        this.setState({
+            open:false
+        })
     }
 
     render() {
@@ -110,10 +127,8 @@ class edit extends Component {
                                 Update post
                             </Button>
 
-                            <Button  
-                                className= "post-button" variant="contained" 
-                                color="primary" onClick={this.handleDelete}>
-                                Delete Post
+                            <Button variant="outlined" color="primary" onClick={this.handleClickOpen}>
+                                <DeleteIcon ></DeleteIcon>
                             </Button>
                         </form>
                         <br/> <br/> 
@@ -131,10 +146,34 @@ class edit extends Component {
                 <Grid item sm={3} xs={12}>
                     <div className="file-media"> 
                             {media? media.map(row => (
-                                <File key={row.id} file={row}  data={this.props}/>
+                                <FileCard key={row.id} file={row}  data={this.props}/>
                             )) : null }
                     </div> 
                 </Grid>
+
+                <Dialog
+                    open={this.state.open}
+                    onClose={this.handleClose}
+                    aria-labelledby="alert-dialog-title"
+                    aria-describedby="alert-dialog-description"
+                >
+                    <DialogTitle id="alert-dialog-title">
+                        {"Are you sure you want to delete this post ?"}
+                    </DialogTitle>
+                    <DialogContent>
+                        <DialogContentText id="alert-dialog-description">
+                        Post will be deleted permanently.
+                        </DialogContentText>
+                    </DialogContent>
+                    <DialogActions>
+                        <Button onClick={this.handleClose} color="primary">
+                            Cancel
+                        </Button>
+                        <Button onClick={this.handleDeleteConfirm} color="primary" autoFocus>
+                            Confirm
+                        </Button>
+                    </DialogActions>
+                </Dialog>
             </Grid>
         );
 	}

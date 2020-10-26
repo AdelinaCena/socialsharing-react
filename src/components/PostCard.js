@@ -39,7 +39,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-export const Post = (props) => {
+export const PostCard = (props) => {
 	const classes = useStyles();
     
     const loadPosts = props.posts;

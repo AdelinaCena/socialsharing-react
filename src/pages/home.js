@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 // post card component
-import { Post } from '../components/Post';
+import { PostCard } from '../components/PostCard';
 // actions
 import { getAllPosts } from '../store/actions/PostAction';
 // material-ui
@@ -24,7 +24,7 @@ class home extends Component {
 						Add post
 					</Button>
 				    <div style={{marginTop:'20px'}}> 
-				    	<Post posts={loadPosts} data={this.props}/>
+				    	<PostCard posts={loadPosts} data={this.props}/>
 				    </div>
 				</Grid>
 				<Grid item sm={2} xs={12} />
