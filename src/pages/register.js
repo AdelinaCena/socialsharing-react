@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import TextField from '@material-ui/core/TextField';
-import Grid from '@material-ui/core/Grid';
+// material-ui
+import { TextField, Grid, Typography, Button } from '@material-ui/core';
+// user image
 import AppIcon from '../images/icon.png';
-import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
+// link
 import { Link } from 'react-router-dom';
-
+// actions
 import { signUp } from '../store/actions/AuthAction';
 // redux
 import { connect } from 'react-redux'
@@ -15,7 +15,6 @@ import '../css/login.css';
 const styles = (theme) => ({
   ...theme
 });
-
 
 class register extends Component {
 	constructor(props)
@@ -28,13 +27,15 @@ class register extends Component {
         	password_confirmation:"",
         }
 	}
-
+    
+    // handles user registration
 	handleSubmit = (e) =>{
 		e.preventDefault();
 		this.props.signUp(this.state, this.props.history);
 		console.log(this.props)
 	}
-
+    
+    // called every time a field changes
 	handleChange = (e) => {
 		this.setState({
 			[e.target.name] :e.target.value
@@ -45,14 +46,13 @@ class register extends Component {
 		const { authResponse } = this.props;
 		return(
 			<Grid container className="styles.form">
-			    <Grid item sm={4} xs={12}>
-				</Grid>
+			    <Grid item sm={4} xs={12}/>
 				<Grid item sm={4} xs={12}>
 					<div className="login">
-					   <Typography variant="h3" className={styles.pageTitle}>
-			            Register
-			          </Typography>
-			           <img src={AppIcon} alt="monkey" className="image" />
+					    <Typography variant="h3" className={styles.pageTitle}>
+				            Register
+			            </Typography>
+			            <img src={AppIcon} alt="monkey" className="image" />
 					    <form onSubmit={this.handleSubmit} className={styles.form} >
 				        
 					        <TextField 
@@ -83,22 +83,20 @@ class register extends Component {
 				            </div>
 
 					        <Button
-				              type="submit"
-				              variant="contained"
-				              color="secondary"
-				              className="login-button"
-				            >
-				              Register
+				                type="submit"
+				                variant="contained"
+				                color="secondary"
+				                className="login-button">
+				                    Register
 				            </Button>
-				             <br />
+				            <br />
 				            <small>
-				              dont have an account ? sign up <Link to="/login">here</Link>
+				                dont have an account ? sign up <Link to="/login">here</Link>
 				            </small>
 					    </form>
 				    </div>
 				</Grid>
-				<Grid item sm={4} xs={12}>
-				</Grid>
+				<Grid item sm={4} xs={12}/>
 			</Grid>
 	    );
 	}

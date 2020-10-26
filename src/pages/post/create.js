@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
-
 import { connect } from 'react-redux'
-import { TextField, TextareaAutosize } from '@material-ui/core';
-import Button from '@material-ui/core/Button';
-
+import { TextField, TextareaAutosize, Button,  } from '@material-ui/core';
+// dropzone 
 import 'react-dropzone-uploader/dist/styles.css'
 import Dropzone from 'react-dropzone-uploader'
-
+// actions
 import { addPost } from '../../store/actions/PostAction';
+// css
 import '../../css/post.css'
 
 
@@ -26,22 +25,24 @@ class create extends Component {
     
     // called every time a file's `status` changes
     handleChangeStatus = ({ meta, file }, status) => {
-       if (status == 'done') {
-         let media = this.state.media;
-         media.push(file);
-         this.setState({
-            media
-         })
-       } 
+       if (status === 'done') {
+            let media = this.state.media;
+            media.push(file);
+            this.setState({
+                media
+            })
+        } 
     }  
-
+    
+    // called every time a field changes
 	handleChange = (e) => {
 		this.setState({
 			[e.target.name] :e.target.value,
 		});
     }
-
-    handleSubmit = (e) =>{
+    
+    // handle create post submit
+    handleSubmit = (e) =>{ 
         e.preventDefault();
         let formData = new FormData()
 
@@ -52,15 +53,12 @@ class create extends Component {
         formData.append('title', this.state.title);
         formData.append('text', this.state.text);
 
-        console.log(formData);
-
         this.props.addPost(formData);
 
         this.props.history.push('/');
     }
 
     render() {
-        const { media } = this.props
 	    return (
             <div className="edit-post-form">
                 <form noValidate autoComplete="off" encType="multipart/form-data">

@@ -1,10 +1,15 @@
 
+/*
+*Class HttpService
+*Stores the main http functions 
+*Reusable funx
+*/
 class HttpService {
-
+    
     url = "http://localhost:8000/api";
 
     postData = async(item, added_url, type = 'POST') => {
-        
+        // item from local storage that stores the token
     	const token = await localStorage.getItem('user');
     	let requestOptions = {
     		method: type,
@@ -21,6 +26,7 @@ class HttpService {
     }
 
     getData = async(added_url) => {
+        // item from local storage that stores the token
     	const token = await localStorage.getItem('user');
     	let requestOptions = {
     		method: 'GET',
@@ -35,7 +41,7 @@ class HttpService {
 
 
     postFormData = async(item, added_url, type = 'POST') => {
-        
+        // item from local storage that stores the token
         const token = await localStorage.getItem('user');
         let requestOptions = {
             method: type,

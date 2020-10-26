@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import './App.css';
 import Navbar from './components/Navbar';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
@@ -23,26 +23,28 @@ const theme = createMuiTheme({
   },
 });
 
-function App() {
-  return (
-    <MuiThemeProvider theme={theme}>
-        <div className="App">
-            <Router>
-                <Navbar />
-                <div className="container">
-    	            <Switch>
-                    <PrivateRoute exact path="/" component={home} />
-    		            <Public exact path="/login" component={login} />
-                    <Public exact path="/register" component={register} />
-                    <PrivateRoute exact path="/posts/create" component={create} />
-                    <PrivateRoute exact path="/posts/:post" component={edit} />
-                    <Route exact path="/logout" />
-    	            </Switch>
+class App extends Component {
+    render() {
+        return (
+            <MuiThemeProvider theme={theme}>
+                <div className="App">
+                    <Router>
+                        <Navbar />
+                        <div className="container">
+                            <Switch>
+                            <PrivateRoute exact path="/" component={home} />
+                            <Public exact path="/login" component={login} />
+                            <Public exact path="/register" component={register} />
+                            <PrivateRoute exact path="/posts/create" component={create} />
+                            <PrivateRoute exact path="/posts/:post" component={edit} />
+                            <Route exact path="/logout" />
+                            </Switch>
+                        </div>
+                    </Router>
                 </div>
-            </Router>
-        </div>
-    </MuiThemeProvider>
-  );
+            </MuiThemeProvider>
+        );
+    }
 }
 
 export default App;

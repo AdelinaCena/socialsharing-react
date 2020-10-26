@@ -9,7 +9,6 @@ export const AllPosts = () => {
 
 export const CreatePost = (post) => {
 	const http = new HttpService();
-	
 	return http.postFormData(post, 'posts').then(data => {
 		return data;
 	}).catch(error => console.log(error));
@@ -17,7 +16,6 @@ export const CreatePost = (post) => {
 
 export const GetSinglePost = (postId) => {
 	const http = new HttpService();
-	
 	return http.getData('posts/'+postId).then(data => {
 		return data;
 	}).catch(error => console.log(error));
@@ -25,7 +23,6 @@ export const GetSinglePost = (postId) => {
 
 export const UpdatePost = (post, postId) => {
 	const http = new HttpService();
-	
 	return http.postData(post, 'posts/'+postId, 'PUT').then(data => {
 		return data;
 	}).catch(error => console.log(error));
@@ -33,15 +30,20 @@ export const UpdatePost = (post, postId) => {
 
 export const DeletePostById = (postID) => {
 	const http = new HttpService();
-	
 	return http.postData(null,'posts/'+postID, 'DELETE').then(data => {
+		return data;
+	}).catch(error => console.log(error));
+}
+
+export const AddFileToPost = (files) => {
+	const http = new HttpService();
+	return http.postFormData(files,'posts/files/', 'POST').then(data => {
 		return data;
 	}).catch(error => console.log(error));
 }
 
 export const DeletePostFile = (fileId) => {
 	const http = new HttpService();
-	
 	return http.postData(null,'files/'+fileId, 'DELETE').then(data => {
 		return data;
 	}).catch(error => console.log(error));

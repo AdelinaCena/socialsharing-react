@@ -1,29 +1,25 @@
 import React, { Component } from 'react';
+// post card component
 import { Post } from '../components/Post';
+// actions
 import { getAllPosts } from '../store/actions/PostAction';
-import Grid from '@material-ui/core/Grid';
-import Button from '@material-ui/core/Button';
-
-
+// material-ui
+import { Grid, Button } from '@material-ui/core';
 // redux
 import { connect } from 'react-redux'
 
 class home extends Component {
-	constructor(props) {
-	    super(props);
-	}
-
 	componentDidMount = async() => {
 		await this.props.getAllPosts();
 	}
 
     render() {
+    	// all posts
     	const { loadPosts } = this.props;
 	    return (
 	    	<Grid container className="styles.form">
 			    <Grid item sm={2} xs={12}/>
 				<Grid item sm={8} xs={12} className="posts-view">
-					
 					<Button style={{marginTop:'10px'}} variant="contained" color="primary" href="/posts/create">
 						Add post
 					</Button>
@@ -35,9 +31,7 @@ class home extends Component {
 			</Grid>
 	    );
 	}
-
 }
-
 
 const mapDispatchToProps = (dispatch) => {
 	return {

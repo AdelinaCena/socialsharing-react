@@ -24,7 +24,6 @@ const PostReducer = (state = initState, action) => {
 		case 'ADD_POST':
 			return state.concat([action.data]);
 		case 'GET_SINGLE_POST':
-			console.log(action.res.media)
 			return {
 				...state,
 				post: action.res.post,
@@ -36,7 +35,6 @@ const PostReducer = (state = initState, action) => {
 			media: state.media.push(action.file)
 		};
 		case 'LOAD_POSTS':
-		    console.log(action.res);
 			return{
 				...state,
 				loadPosts: action.res

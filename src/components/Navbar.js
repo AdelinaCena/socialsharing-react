@@ -1,71 +1,71 @@
 import React from 'react';
+// Material-ui styles
 import { makeStyles } from '@material-ui/core/styles';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
-import IconButton from '@material-ui/core/IconButton';
+// Material-ui core
+import { AppBar, Toolbar, Typography, Button, IconButton } from '@material-ui/core';
+// Material-ui menu icons
 import MenuIcon from '@material-ui/icons/Menu';
+// Dom Router
 import { Link } from 'react-router-dom';
+// actions
 import { logoutUser } from '../store/actions/AuthAction';
-import { connect } from 'react-redux'
+// redux
+import { connect } from 'react-redux';
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
-  },
-  menuButton: {
-    marginRight: theme.spacing(2),
-  },
-  title: {
-    flexGrow: 1,
-  },
+    root: {
+        flexGrow: 1,
+    },
+    menuButton: {
+        marginRight: theme.spacing(2),
+    },
+    title: {
+        flexGrow: 1,
+    },
 }));
 
 
 const Navbar = (props) => {
-
+    // handle logout action
     const handleSubmit = (props) => {
-        const token = localStorage.removeItem('user'); 
-        const userId= localStorage.removeItem('user_id');
-
+        localStorage.removeItem('user'); 
+        localStorage.removeItem('user_id');
         window.open('/', '_self')
-
-        // console.log(props);
-
-        // props.history.push('/');
     }
-
-	const classes = useStyles();
-
-  const hasUser = localStorage.getItem('user');
-
+    // navbar custom style
+  	const classes = useStyles();
+    // check if user is logedd in from user storage
+    const hasUser = localStorage.getItem('user');
 
     return(
         <div className="appbar">
-	        <AppBar position="static">
+  	        <AppBar position="static">
                 <Toolbar>
-                    <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
+                    <IconButton 
+                        edge="start" className={classes.menuButton} 
+                        color="inherit" aria-label="menu">
                       <MenuIcon />
                     </IconButton>
+
                     <Typography variant="h6" className={classes.title}>
-                        <Link to="/" className="appbar"> Social Sharing </Link>
+                        <Link to="/" className="appbar"> 
+                            Social Sharing 
+                        </Link>
                     </Typography>
 
                     { hasUser ? 
-                        <Button type="submit" className="appbar" onClick={handleSubmit}>
-                            LogOut
-                        </Button>
-                    :
-                    <>
-                      <Link to="/login" className="appbar">
-                         <Button color="inherit">Login</Button>
-                         </Link>
-                         <Link to="/register" className="appbar">
-                         <Button color="inherit">Register</Button>
-                         </Link> 
-                       </>
-                     }
+                            <Button type="submit" className="appbar" onClick={handleSubmit}>
+                                LogOut
+                            </Button>
+                    :   <>
+                            <Link to="/login" className="appbar">
+                                <Button color="inherit">Login</Button>
+                            </Link>
+                            <Link to="/register" className="appbar">
+                                <Button color="inherit">Register</Button>
+                            </Link> 
+                        </>
+                    }
 
                 </Toolbar>
             </AppBar>
@@ -74,12 +74,12 @@ const Navbar = (props) => {
 }
 
 const mapStatesToProps = (state) => {
-  return { 
-  }
+    return { 
+    }
 }
 
 const mapDispatchToProps = (dispatch) => {
-  return {
+    return {
     logoutUser:() => dispatch(logoutUser())
   }
 }

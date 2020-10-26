@@ -1,5 +1,4 @@
 import { SignUpService, LoginService, LogoutService } from '../services/AuthService';
-import { Route, Redirect } from 'react-router-dom';
 
 export const signUp = (credentials, history) => {
 	return (dispatch) => {
@@ -22,7 +21,6 @@ export const signUp = (credentials, history) => {
 		});
 	}
 }
-
 
 export const loginUser = (credentials, history) => {
 	return (dispatch) => {

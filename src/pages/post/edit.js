@@ -1,44 +1,75 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import TextField from '@material-ui/core/TextField';
-import TextareaAutosize from '@material-ui/core/TextareaAutosize';
-import Button from '@material-ui/core/Button';
-import ReactDOMServer from 'react-dom/server';
-import { getPost, updatePost, deletePost, deleteFile} from '../../store/actions/PostAction';
+// ui import 
+import { TextField, TextareaAutosize, Button, Grid } from '@material-ui/core';
+// actions
+import { getPost, updatePost, deletePost } from '../../store/actions/PostAction';
+import { addFile, deleteFile } from '../../store/actions/MediaAction';
+// dropzone
 import 'react-dropzone-uploader/dist/styles.css'
 import Dropzone from 'react-dropzone-uploader'
+// css
 import '../../css/post.css'
+// file componet 
 import  { File } from  '../../components/File'
-import Grid from '@material-ui/core/Grid';
 
 class edit extends Component {
     
 	constructor(props) {
         super(props);
+        this.state = {
+            newFile:[]
+        }
 
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.handleChangeStatus = this.handleChangeStatus.bind(this);
     }
-
+    
     componentDidMount () {
         this.props.getPost(this.props.match.params.post);
 	}
     
+    // called every time a field changes
+    handleChange = (e) => {
+        this.setState({
+            [e.target.name] :e.target.value,
+        });
+    }
+
+    // called every time a file's `status` changes
+    handleChangeStatus = ({ meta, file }, status) => {
+        if (status == 'done') {
+            let newFile = this.state.newFile;
+            newFile.push(file);
+            this.setState({
+                newFile
+            })
+        } 
+    }  
+    
+    // handles post update submit 
     handleSubmit = (e) =>{
         e.preventDefault();
         this.props.updatePost(this.state, this.props.match.params.post);
         this.props.history.push('/');
     }
     
-	handleChange = (e) => {
-		this.setState({
-			[e.target.name] :e.target.value,
-            new_file: "why react "
-		});
+    // handles add files submit
+    handleFileSubmit = (files, allFiles) => {
+        let fileFormData = new FormData()
 
-        console.log(this.state)
-	}
+        this.state.newFile.forEach((file, index) => {
+            fileFormData.append('media[]', file);
+        });
+        fileFormData.append('post_id', this.props.match.params.post);
+        this.props.addFile(fileFormData)
+
+        setTimeout(function() {
+            window.location.reload();
+        }, 1000);  
+                
+    }
 
     // delete post function
     handleDelete = () => {
@@ -46,17 +77,9 @@ class edit extends Component {
         this.props.history.push('/');
     }
 
-    // called every time a file's `status` changes
-    handleChangeStatus = ({ meta, file }, status) => {
-        if (status == 'done') {
-       } 
-    }  
-
-
     render() {
         const { post } = this.props.singlePost 
         const { media } = this.props.singlePost;
-        console.log(this.props);
         
 	    return (
             <Grid container className="styles.form">
@@ -67,31 +90,44 @@ class edit extends Component {
                             <TextField 
                                 id="email" name="title" type="text" 
                                 label="Title"
-                                value={this.state ? this.state.title : post.title} 
+                                value={this.state.title ? this.state.title : post.title} 
                                 fullWidth 
                                 onChange={this.handleChange}/>
+
                             <TextareaAutosize 
-                                    aria-label="maximum width" 
-                                    name="text" 
-                                    label="Text"
-                                    style={{width: '100%', marginTop:'10px'}}
-                                    rowsMin="10"
-                                    value={this.state ? this.state.text : post.text}
-                                    onChange={this.handleChange}
-                                    placeholder="Text here" />
-                        
-                            <Button  className= "post-button" variant="contained" color="primary" onClick={this.handleSubmit}>
+                                aria-label="maximum width" 
+                                name="text" 
+                                label="Text"
+                                style={{width: '100%', marginTop:'10px'}}
+                                rowsMin="10"
+                                value={this.state.text ? this.state.text : post.text}
+                                onChange={this.handleChange}
+                                placeholder="Text here" />
+
+                            <Button  
+                                className= "post-button" variant="contained" 
+                                color="primary" onClick={this.handleSubmit}>
                                 Update post
                             </Button>
 
-                            <Button  className= "post-button" variant="contained" color="primary" onClick={this.handleDelete}>
+                            <Button  
+                                className= "post-button" variant="contained" 
+                                color="primary" onClick={this.handleDelete}>
                                 Delete Post
                             </Button>
                         </form>
+                        <br/> <br/> 
+                        <div> 
+                            <p> Add new file </p>
+                            <Dropzone
+                            getUploadParams={this.getUploadParams}
+                            onChangeStatus={this.handleChangeStatus}
+                            onSubmit={this.handleFileSubmit}
+                            accept="image/*,audio/*,video/*"/>
+                        </div>
                     </div>
                 </Grid>
-                <Grid item sm={1} xs={12}>
-                </Grid>
+                <Grid item sm={1} xs={12}/>
                 <Grid item sm={3} xs={12}>
                     <div className="file-media"> 
                             {media? media.map(row => (
@@ -100,8 +136,6 @@ class edit extends Component {
                     </div> 
                 </Grid>
             </Grid>
-
-           
         );
 	}
 
@@ -118,7 +152,8 @@ const mapDispatchToProps = (dispatch) => {
         getPost:(postId) => dispatch(getPost(postId)),
         updatePost:(post, postId) => dispatch(updatePost(post, postId)),
         deletePost:(postId) => dispatch(deletePost(postId)),
-        deleteFile:(fileId) => dispatch(deleteFile(fileId))
+        addFile:(postId) => dispatch(addFile(postId)) ,
+        deleteFile:(fileId) => dispatch(deleteFile(fileId)),
 	}
 }
 

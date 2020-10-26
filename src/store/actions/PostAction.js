@@ -4,7 +4,6 @@ import {
 	CreatePost, 
 	UpdatePost, 
 	DeletePostById,  
-	DeletePostFile
 } from '../services/PostService';
 
 export const getAllPosts = () => (dispatch) => {
@@ -60,7 +59,7 @@ export const updatePost = (postData, postId) => (dispatch) => {
 export const deletePost = (postId) => (dispatch) => {
 	DeletePostById(postId).then(res => {
 		if(res.success){
-			dispatch({type:'UPDATE_POST', res})
+			dispatch({type:'DELETE_POST', res})
 			return res;
 		}
 	}
@@ -70,15 +69,3 @@ export const deletePost = (postId) => (dispatch) => {
 	});
 }
 
-export const deleteFile = (fileId) => (dispatch) => {
-	DeletePostFile(fileId).then(res => {
-		if(res.success){
-			dispatch({type:'UPDATE_POST', res})
-			return res;
-		}
-	}
-	
-	).catch(error => {
-		dispatch({type:'CODE_ERROR', error})
-	});
-}
